@@ -1,8 +1,13 @@
 const express = require('express');
-const Notes = require('./modals/notes.model');
 const NotesModel = require('./modals/notes.model');
+const cors = require('cors');
+
+
 const app = express();
 
+
+// Enable from all sourse
+app.use(cors());
 
 
 // To get data From req.body
