@@ -1,6 +1,7 @@
 const express = require('express');
 const NotesModel = require('./modals/notes.model');
 const cors = require('cors');
+const path = require('path');
 
 
 const app = express();
@@ -80,7 +81,7 @@ app.delete('/api/notes/:id', async (req, res)=>{
 
 
 /**
- * Patch /api/notes/:id
+ * Patch /api/notes/:id  -> partial updates
  * -> Update the description of notes
  * -> req.body = {description}
  */
@@ -94,6 +95,11 @@ app.patch('/api/notes/:id', async (req, res)=>{
     res.status(200).json({
         message: "Notes updated successfully!"
     })
+})
+
+// Wild card
+app.use('*name', (req, res)=>{
+    res.sendFile(path.join(__dirname, "..", "/public/index.html"));
 })
 
 module.exports = app;
