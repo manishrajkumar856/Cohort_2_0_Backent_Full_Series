@@ -1,0 +1,27 @@
+==> Authentication
+ => register 
+ => login
+ => logout (token blacklisting)
+ => Otp based registration
+
+
+==> post 
+    => create
+    => can see the feed
+    => like post (collection types)
+    => save post
+
+==> users
+    => followers
+    => following
+
+
+// Day-15
+
+POST =>
+    {
+        caption: String,
+        img_url: String,
+        user: userId,
+        createdAt: Date-time,
+    }
