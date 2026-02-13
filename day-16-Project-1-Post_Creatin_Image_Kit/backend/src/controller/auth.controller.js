@@ -1,16 +1,11 @@
-const express = require('express');
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
-const userModal = require('../modals/user.modals');
-const { use } = require('react');
 
-const authRouter = express.Router();
+const userModal = require("../modals/user.modals");
+const  bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const cookieParser = require('cookie-parser');
 
-/**
- * POST -> Register new user
- * /api/auth/register
- */
-authRouter.post('/register', async (req, res)=>{
+
+const register = async (req, res)=>{
     const {username, email, password, bio, profileUrl} = req.body;
 
     /**
@@ -27,14 +22,15 @@ authRouter.post('/register', async (req, res)=>{
 
 
     if(isUserAlreadyExist){
-        return res.status(409).json({
-            message: "User already exist!"+ (isUserAlreadyExist.username === username) ? "Username already exist" : "Email already exist" ,
+        return res.status(404).json({
+            message: "User already exist!"
         });
     }
 
-    // Convert password into hash
-    const hash = crypto.createHash("md5").update(password).digest('hex');
+    //************ Convert password into hash
+    const bcrypt = bcrypt.hash(password, 10); // Hash
     
+
     // Create new user
     const user = await userModal.create({
         username,
@@ -58,15 +54,10 @@ authRouter.post('/register', async (req, res)=>{
     })
 
 
-})
+}
 
 
-/**
- * POST -> login user
- * /api/auth/login
- */
-
-authRouter.post('/login', async (req, res)=>{
+const login = async (req, res)=>{
     const {username, email, password} = req.body;
 
     /**
@@ -80,15 +71,15 @@ authRouter.post('/login', async (req, res)=>{
     });
 
     if(!user){
-        return res.status(404).json({
+        return res.status(400).json({
             message: "User not exist"
         })
     }
 
-    const hashedPassword = crypto.createHash("md5").update(password).digest("hex");
-    const isPasswordValid = hashedPassword == user.password;
-    if(isPasswordValid){
-        return res.status(401).json({
+    // *********** Compare Bcrypt password
+    const isPassMatched = bcrypt.compare(password, user.password);
+    if(!isPassMatched){
+        return res.status(404).json({
             message: "Invalied Password!",
         });
     }
@@ -103,16 +94,15 @@ authRouter.post('/login', async (req, res)=>{
     res.cookie('token', token);
 
     res.status(200).json({
-        message: "User logged in successfully",
+        message: "User logged in successfyllt",
         userData: {
             username: user.username,
             email: user.email,
             profileUrl: user.profileUrl,
             bio: user.bio,          
         }
-    });
+    })
+}
 
-})
 
-
-module.exports = authRouter;
+module.exports = {register, login}
