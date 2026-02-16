@@ -12,7 +12,7 @@ const imagekit = new ImageKit({
   
 });
 
-
+// Create new post and upload
 async function createPost(req, res) {
   console.log(req.file);
 

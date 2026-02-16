@@ -2,10 +2,10 @@ const app = require('./src/app');
 const connectToDb = require('./src/config/db');
 
 
-// Mongo Connection 
+// Connect to mongodb 
 connectToDb();
 
-//Lestening to the server
+//Running Server 
 app.listen(3000, ()=>{
     console.log("Server running at post 3000....");
 })

@@ -13,9 +13,11 @@ const imagekit = new ImageKit({
   
 });
 
+/**
+ * Creare New Post
+ */
 
 async function createPost(req, res) {
-  console.log(req.file);
 
   /**
    * Read token from cookies

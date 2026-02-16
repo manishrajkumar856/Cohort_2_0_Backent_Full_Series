@@ -5,14 +5,10 @@ const authRouter = express.Router();
 
 
 /**
- * POST -> /api/auth/register 
+ * REGISTER -> /api/auth/register/
  */
-authRouter.post('/register', authController.register);
-
-/**
- * POST -> /api/auth/login
- */
-authRouter.post('/login', authController.login);
+authRouter.post('/register',  authController.registerUserController);
+authRouter.post('/login', authController.loginUserController);
 
 
 
