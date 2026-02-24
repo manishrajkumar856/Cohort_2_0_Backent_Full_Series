@@ -1,0 +1,22 @@
+=> UI 
+    -> Ui dikhana user lo or navigate karna
+        -> Navigation - npm i react-router
+
+
+
+=> Hook
+    -> Manage karna state and Api layer ko
+
+
+
+=> State => Storage
+    -> State Manage karna
+        -> loading,
+        -> user,
+        -> post list,
+        -> error
+
+
+
+=> Api
+    -> Backend se communicate karna

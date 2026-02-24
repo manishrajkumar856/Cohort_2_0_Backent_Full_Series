@@ -1,0 +1,16 @@
+=> Recipee Application
+
+
+
+=> FrontEnd
+    => Used Techonology
+        -> Tailwind Css
+        -> Nano id
+        -> React Router Dom
+        -> React hook form
+        -> React toastify
+        
+
+
+
+// Shadi.com -> Next Project
